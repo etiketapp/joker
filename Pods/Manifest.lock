@@ -1,0 +1,53 @@
+PODS:
+  - ActionSheetPicker-3.0 (2.4.1)
+  - Alamofire (4.9.1)
+  - AlamofireNetworkActivityIndicator (2.4.0):
+    - Alamofire (~> 4.8)
+  - Kingfisher (4.10.1)
+  - lottie-ios (3.1.6)
+  - SwiftValidator (4.0.0)
+  - TinyConstraints (4.0.1)
+
+DEPENDENCIES:
+  - ActionSheetPicker-3.0 (from `https://github.com/etiketapp/ActionSheetPicker-3.0`)
+  - Alamofire
+  - AlamofireNetworkActivityIndicator
+  - Kingfisher (~> 4.2)
+  - lottie-ios
+  - SwiftValidator (from `https://github.com/mobillium/SwiftValidator.git`)
+  - TinyConstraints
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - AlamofireNetworkActivityIndicator
+    - Kingfisher
+    - lottie-ios
+    - TinyConstraints
+
+EXTERNAL SOURCES:
+  ActionSheetPicker-3.0:
+    :git: https://github.com/etiketapp/ActionSheetPicker-3.0
+  SwiftValidator:
+    :git: https://github.com/mobillium/SwiftValidator.git
+
+CHECKOUT OPTIONS:
+  ActionSheetPicker-3.0:
+    :commit: 5210766f122a1426425444dd00b69f95f2c1cb26
+    :git: https://github.com/etiketapp/ActionSheetPicker-3.0
+  SwiftValidator:
+    :commit: 3cfa36ccbd4da0d89b7792032c907b432298ce93
+    :git: https://github.com/mobillium/SwiftValidator.git
+
+SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: 2d5d63a30d192e8a7510a520447ab1b9407274a6
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  AlamofireNetworkActivityIndicator: 9acc3de3ca6645bf0efed462396b0df13dd3e7b8
+  Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+  lottie-ios: 85ce835dd8c53e02509f20729fc7d6a4e6645a0a
+  SwiftValidator: dc1ffa1102b49a47f2d816899de55d70281a2994
+  TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
+
+PODFILE CHECKSUM: 14c20b3f6171fbf4368e30d150777713a820cfb9
+
+COCOAPODS: 1.8.4
