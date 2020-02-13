@@ -79,4 +79,30 @@ extension UIViewController {
         performAlert(title: "Error", message: message, buttonTitle: "OK", style: .alert)
     }
     
+    //MARK: - Progress Hud
+    func showLoadingDialog() {
+        self.view.endEditing(true)
+        self.hideLoadingDialog()
+        LoadingViewPresenter.shared.show()
+    }
+    
+    func hideLoadingDialog() {
+        LoadingViewPresenter.shared.hide()
+    }
+    
+    //MARK: - Disable and Enable
+    func disableViews(withAlpha: CGFloat) {
+        for view in self.view.subviews{
+            view.isUserInteractionEnabled = false
+            view.alpha = withAlpha
+        }
+    }
+    
+    func enableViews(withAlpha: CGFloat) {
+        for view in self.view.subviews{
+            view.isUserInteractionEnabled = true
+            view.alpha = withAlpha
+        }
+    }
+    
 }

@@ -17,6 +17,8 @@ target 'Rapunzel' do
     pod "TinyConstraints"
     pod 'SwiftValidator', :git => 'https://github.com/mobillium/SwiftValidator.git'
     pod 'ActionSheetPicker-3.0', :git => 'https://github.com/etiketapp/ActionSheetPicker-3.0'
+    pod "TinyConstraints"
+    pod 'IQKeyboardManagerSwift', '~> 6.2.0'
 
 
   target 'RapunzelTests' do

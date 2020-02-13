@@ -44,6 +44,12 @@ class QuestionNumberViewController: BaseViewController {
         
     }
     
+    //MARK: - Fill Presenter
+    func setNickAmount() {
+        presenter.nick = nickTextfield.text
+        presenter.amount = Int(numberTextfield.text!)
+    }
+    
     //MARK: - Check Textfields
     func hasEmptyField() -> Bool {
         let textfields = [nickTextfield, numberTextfield]
@@ -61,7 +67,8 @@ class QuestionNumberViewController: BaseViewController {
             self.showError(message: "Please check the fields.")
             return
         }
-        presenter.goAction()
+        setNickAmount()
+        presenter.goAction(delegate: self)
     }
     
     
@@ -87,7 +94,11 @@ extension QuestionNumberViewController: BottomLineTextfieldDelegate {
             PickerHelper.showStringPicker(categoryTextfield, title: "Category", initialSelection: 0, strings: QuestionConstants.categoryNames) { (row, string) in
                 self.categoryTextfield.text = string
                 self.categoryTextfield.revalidate()
-                guard row != 0 else { return }
+                guard row != 0 else {
+                    self.presenter.selectedCategory = nil
+                    self.presenter.selectedCategoryRow = nil
+                    return
+                }
                 self.presenter.selectedCategory = string
                 self.presenter.selectedCategoryRow = row + 9
             }
@@ -97,8 +108,11 @@ extension QuestionNumberViewController: BottomLineTextfieldDelegate {
             PickerHelper.showStringPicker(categoryTextfield, title: "Difficulty", initialSelection: 0, strings: QuestionConstants.difficulties) { (row, string) in
                 self.difficultyTextfield.text = string
                 self.difficultyTextfield.revalidate()
-                guard row != 0 else { return }
-                self.presenter.selectedDifficulty = string
+                guard row != 0 else {
+                    self.presenter.selectedDifficulty = nil
+                    return
+                }
+                self.presenter.selectedDifficulty = QuestionConstants.difficultiesApi[row]
             }
         case .type:
             self.view.endEditing(true)
@@ -106,8 +120,11 @@ extension QuestionNumberViewController: BottomLineTextfieldDelegate {
             PickerHelper.showStringPicker(categoryTextfield, title: "Type", initialSelection: 0, strings: QuestionConstants.types) { (row, string) in
                 self.typeTextfield.text = string
                 self.typeTextfield.revalidate()
-                guard row != 0 else { return }
-                self.presenter.selectedType = string
+                guard row != 0 else {
+                    self.presenter.selectedType = nil
+                    return
+                }
+                self.presenter.selectedType = QuestionConstants.typesApi[row]
             }
         default:
             break
@@ -122,4 +139,16 @@ extension QuestionNumberViewController: BottomLineTextfieldDelegate {
         //TODO: -
     }
     
+}
+
+
+//MARK: - Questions ViewController Delegate
+extension QuestionNumberViewController: QuestionsViewControllerDelegate {
+    func didFinished() {
+        self.showError(message: "Questions done")
+    }
+    
+    func didGetZeroQuestions() {
+        self.showError(message: "Could not find enough questions")
+    }
 }

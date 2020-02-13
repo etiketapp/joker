@@ -22,6 +22,7 @@ class QuestionNumberRouter: QuestionNumberPresenterToRouterProtocol {
         presenter.view = view
         presenter.router = router
         
+        router.view = view
         
         return view
     }
@@ -30,8 +31,8 @@ class QuestionNumberRouter: QuestionNumberPresenterToRouterProtocol {
         return UIStoryboard(name: "QuestionNumber", bundle: Bundle.main)
     }
     
-    func gotoQuestions(nick: String, questionInfo: QuestionInfo) {
-        let questions = QuestionsRouter.createQuestionsModule(nick: nick, questionInfo: questionInfo)
+    func gotoQuestions(nick: String, questionInfo: QuestionInfo, delegate: QuestionsViewControllerDelegate) {
+        let questions = QuestionsRouter.createQuestionsModule(nick: nick, questionInfo: questionInfo, delegate: delegate)
         view.navigationController?.pushViewController(questions, animated: true)
     }
 

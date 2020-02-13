@@ -14,12 +14,14 @@ class QuestionConstants {
     
     
     static let difficulties = ["Any", "Easy", "Medium", "Hard"]
+    static let difficultiesApi = ["", "easy", "medium", "hard"]
     
     static let types = ["Any", "Multiple Choice", "True / False"]
+    static let typesApi = ["", "multiple", "boolean"]
     
     static func createCategories() -> [Category] {
         var categories = [Category]()
-        var counter = 8
+        var counter = categoryNames.count - 2 //NOTE: - 1 for array begins 0 - 1 for added Any value
         for name in categoryNames {
             let category = Category(name: name, id: counter)
             counter += 1

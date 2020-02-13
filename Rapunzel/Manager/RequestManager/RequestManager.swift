@@ -13,7 +13,6 @@ class RequestManager {
     typealias ErrorClosure = ((ResponseError) -> Void)
     typealias ArrayClosure<T: Codable> = ((ResponseArray<T>) -> Void)
     typealias ObjectClosure<T: Codable> = ((ResponseObject<T>) -> Void)
-    typealias ArrayPaginationClosure<T: Codable> = ((ResponseArrayPagination<T>) -> Void)
     
     static let errorCodeConnection = "error.connection"
     static let errorCodeLocal = "error.local"
@@ -21,25 +20,7 @@ class RequestManager {
     
     static var apiUrl: String {
         get {
-            return "https://api.themoviedb.org/3/"
-        }
-    }
-    
-    static var apiKey: String {
-        get {
-            return "d618cb6007a1f4ddebe12eb371323e59"
-        }
-    }
-    
-    static var imageInitialPath: String {
-        get {
-            return "https://image.tmdb.org/t/p/w500/"
-        }
-    }
-    
-    static var imageInitialPathSmall: String {
-        get {
-            return "https://image.tmdb.org/t/p/w154/"
+            return "https://opentdb.com/api.php"
         }
     }
     
@@ -88,19 +69,6 @@ class RequestManager {
         }
     }
     
-    //MARK: - Pagination
-    static func request<T: Codable>(_ request: RequestDelegate, success: @escaping ArrayPaginationClosure<T>, failure: @escaping ErrorClosure) {
-        let request = createRequest(request)
-        request.responseData { (response) in
-            switch response.result {
-            case .success:
-                success(ResponseArrayPagination<T>.decode(response.result.value!)!)
-            case .failure:
-                handleFailure(response: response, failure: failure)
-            }
-        }
-    }
-    
     //MARK: - Handle failure
     private static func handleFailure(response: DataResponse<Data>, failure: @escaping ErrorClosure) {
         if let data = response.data, let serviceError = ResponseError.decode(data) {
@@ -115,15 +83,17 @@ class RequestManager {
         }
     }
     
+    //NOTE: - Not sure about this part.
+    //TODO: - Check Again
     private static func handleError(statusCode: Int?, localError: Error?, serviceError: ResponseError?, failure: @escaping ErrorClosure) {
         if let error = serviceError {
             failure(error)
         } else if let error = localError as? URLError, error.code == .notConnectedToInternet {
-            failure(ResponseError(status_code: statusCode ?? 0, status_message: error.localizedDescription, success: false))
+            failure(ResponseError(code: errorCodeConnection, message: error.localizedDescription))
         } else if let error = localError {
-            failure(ResponseError(status_code: statusCode ?? 0, status_message: error.localizedDescription, success: false))
+            failure(ResponseError(code: errorCodeLocal, message: error.localizedDescription))
         } else {
-            failure(ResponseError(status_code: statusCode ?? 0, status_message: "Unknowns Error", success: false))
+            failure(ResponseError(code: errorCodeUnknown, message: "Unknow Error"))
         }
     }
     

@@ -10,16 +10,14 @@ import Foundation
 
 struct ResponseError: Codable {
     
-    var status_code: Int!
-    var status_message: String!
-    var success: Bool!
+    var code: String!
+    var message: String!
     
     init() {    }
     
-    init(status_code: Int, status_message: String, success: Bool) {
-        self.status_code = status_code
-        self.status_message = status_message
-        self.success = success
+    init(code: String, message: String) {
+        self.code = code
+        self.message = message
     }
     
 }

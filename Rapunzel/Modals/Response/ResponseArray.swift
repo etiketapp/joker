@@ -10,15 +10,15 @@ import Foundation
 
 class ResponseArray<T: Codable>: BaseResponse {
     
-    var search: [T]!
+    var results: [T]!
     
     enum ResponseArrayCodingKeys: String, CodingKey {
-        case Search
+        case results
     }
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ResponseArrayCodingKeys.self)
-        search = try container.decode([T].self, forKey: .Search)
+        results = try container.decode([T].self, forKey: .results)
         try super.init(from: decoder)
     }
     

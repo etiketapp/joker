@@ -10,17 +10,21 @@ import UIKit
 
 class QuestionsRouter: QuestionsPresenterToRouterProtocol {
     
-    
-    class func createQuestionsModule(nick: String, questionInfo: QuestionInfo) -> QuestionsViewController {
+    class func createQuestionsModule(nick: String, questionInfo: QuestionInfo, delegate: QuestionsViewControllerDelegate) -> QuestionsViewController {
         let view: QuestionsViewController = storyboard.instantiateViewController()
         let presenter: QuestionsViewToPresenterProtocol = QuestionsPresenter()
         let router: QuestionsPresenterToRouterProtocol = QuestionsRouter()
         
         view.presenter = presenter
+        view.delegate = delegate
         
         presenter.view = view
         presenter.router = router
         
+        presenter.nick = nick
+        presenter.questionInfo = questionInfo
+        presenter.currentQuestionNumber = 0
+        presenter.wildCardNumber = 3
         
         return view
     }
@@ -28,5 +32,5 @@ class QuestionsRouter: QuestionsPresenterToRouterProtocol {
     static var storyboard: UIStoryboard {
         return UIStoryboard(name: "Questions", bundle: Bundle.main)
     }
-
+    
 }

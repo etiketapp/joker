@@ -21,9 +21,9 @@ class QuestionNumberPresenter: QuestionNumberViewToPresenterProtocol {
     var selectedDifficulty: String?
     var selectedType: String?
     
-    func goAction() {
+    func goAction(delegate: QuestionsViewControllerDelegate) {
         let questionInfo = QuestionInfo(amount: amount, categoryRow: selectedCategoryRow, difficulty: selectedDifficulty, type: selectedType)
-        router.gotoQuestions(nick: nick, questionInfo: questionInfo)
+        router.gotoQuestions(nick: nick, questionInfo: questionInfo, delegate: delegate)
     }
     
 }

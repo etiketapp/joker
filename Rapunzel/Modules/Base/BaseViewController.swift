@@ -14,6 +14,7 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         
         hideKeyboardWhenTappedAround()
+        view.backgroundColor = .appPaletteNinenth
     }
     
 }

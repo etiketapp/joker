@@ -20,7 +20,7 @@ protocol QuestionNumberViewToPresenterProtocol: class {
     var selectedDifficulty: String? { get set }
     var selectedType: String? { get set }
     
-    func goAction()
+    func goAction(delegate: QuestionsViewControllerDelegate)
     
 }
 
@@ -31,6 +31,6 @@ protocol QuestionNumberPresenterToViewProtocol: class {
 protocol QuestionNumberPresenterToRouterProtocol: class {
     
     var view: QuestionNumberViewController! { get set }
-    func gotoQuestions(nick: String, questionInfo: QuestionInfo)
+    func gotoQuestions(nick: String, questionInfo: QuestionInfo, delegate: QuestionsViewControllerDelegate)
     
 }
